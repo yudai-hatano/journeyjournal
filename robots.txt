@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://journeyjournal.example.jp/sitemap.xml
+Sitemap: https://yudai-hatano.github.io/journeyjournal/sitemap.xml
