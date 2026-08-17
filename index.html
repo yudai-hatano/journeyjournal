@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JourneyJournal｜経理代行・記帳代行から確定申告サポートまで</title>
+<meta name="description" content="確定申告、何から始めればいいか分からない方へ。経理代行・記帳代行から確定申告の準備・入力サポートまで、ひとつの窓口でご相談いただけます。税務知識ゼロでも安心。夜職・個人事業主の方に選ばれています。">
+<!-- TODO: 本番公開時に、下記の PLACEHOLDER_DOMAIN を実際のドメインに置き換えてください -->
+<link rel="canonical" href="https://journeyjournal.example.jp/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JourneyJournal">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://journeyjournal.example.jp/">
+<meta property="og:title" content="JourneyJournal｜経理代行・記帳代行から確定申告サポートまで">
+<meta property="og:description" content="経理代行・記帳代行から確定申告の準備・入力サポートまで、ひとつの窓口でご相談いただけます。代理申告が必要な場合は提携税理士をご紹介します。">
+<meta property="og:image" content="https://journeyjournal.example.jp/assets/ogp.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JourneyJournal｜経理代行・記帳代行から確定申告サポートまで">
+<meta name="twitter:description" content="経理代行・記帳代行から確定申告の準備・入力サポートまで、ひとつの窓口でご相談いただけます。">
+<meta name="twitter:image" content="https://journeyjournal.example.jp/assets/ogp.svg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2312203a'/%3E%3Ccircle cx='50' cy='50' r='46' fill='none' stroke='%23d9ab5c' stroke-width='3'/%3E%3Cpolygon points='50,20 58,50 50,80 42,50' fill='%23d9ab5c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "経理代行・記帳代行、確定申告の準備・入力サポート",
+  "name": "JourneyJournal",
+  "description": "経理代行・記帳代行から確定申告の準備・入力サポートまでを、ひとつの窓口でご相談いただけるサービスです。代理申告(税理士業務)は行わず、必要な場合は提携税理士をご紹介します。",
+  "provider": {
+    "@type": "Organization",
+    "name": "JourneyJournal",
+    "url": "https://journeyjournal.example.jp/"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "JP"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "個人事業主・小規模法人"
+  },
+  "url": "https://journeyjournal.example.jp/",
+  "termsOfService": "https://journeyjournal.example.jp/tokushoho.html"
+}
+</script>
+</head>
+<body>
+
+<!-- ==================== ヘッダー ==================== -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="#top" class="brand">
+      <svg class="brand__mark" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="4"/><polygon points="50,18 60,50 50,82 40,50" fill="currentColor"/><circle cx="50" cy="50" r="4" fill="#fbf7ee"/></svg>
+      <span>
+        JourneyJournal
+        <span class="brand__sub">経理代行・記帳代行</span>
+      </span>
+    </a>
+    <nav class="nav" id="siteNav">
+      <ul class="nav__list">
+        <li><a href="#concept">コンセプト</a></li>
+        <li><a href="#service">サービス・料金</a></li>
+        <li><a href="#software">対応ソフト</a></li>
+        <li><a href="#flow">ご依頼の流れ</a></li>
+        <li><a href="#news">お知らせ</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#notice">ご依頼にあたって</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a href="#contact" class="btn btn--outline btn--block">お問い合わせ</a>
+      </div>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== ヒーロー ==================== -->
+<section class="hero" id="top">
+  <div class="hero__stars" aria-hidden="true"></div>
+  <svg class="hero__route" viewBox="0 0 1200 700" aria-hidden="true">
+    <path d="M -20 560 C 200 500, 260 420, 420 440 S 620 560, 760 460 S 980 260, 1220 220" fill="none" stroke="#d9ab5c" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round"/>
+  </svg>
+  <svg class="hero__compass" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="92" fill="none" stroke="#d9ab5c" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#d9ab5c" stroke-width="1"/>
+    <g stroke="#d9ab5c" stroke-width="1">
+      <line x1="100" y1="8" x2="100" y2="28"/>
+      <line x1="100" y1="172" x2="100" y2="192"/>
+      <line x1="8" y1="100" x2="28" y2="100"/>
+      <line x1="172" y1="100" x2="192" y2="100"/>
+    </g>
+    <polygon points="100,40 114,100 100,160 86,100" fill="#d9ab5c" opacity="0.8"/>
+  </svg>
+
+  <div class="container hero__inner">
+    <span class="hero__eyebrow">経理代行・記帳代行 / 確定申告サポート</span>
+    <h1 class="hero__title">記帳から確定申告まで、<br>ひとつの<em>窓口</em>で。</h1>
+    <p class="hero__desc">
+      お金の記録の整理(経理代行・記帳代行)から、確定申告の入力サポートまで、まるっとご相談いただけます。
+      代理申告が必要な場合も、提携税理士へおつなぎします。
+    </p>
+
+    <div class="hero__onestop" role="list">
+      <div class="onestop__item" role="listitem">
+        <span class="onestop__num">01</span>
+        <span class="onestop__label">経理代行・記帳代行<small>お金の記録の整理</small></span>
+      </div>
+      <span class="onestop__arrow" aria-hidden="true">→</span>
+      <div class="onestop__item" role="listitem">
+        <span class="onestop__num">02</span>
+        <span class="onestop__label">確定申告の準備<small>入力サポート</small></span>
+      </div>
+      <span class="onestop__arrow" aria-hidden="true">→</span>
+      <div class="onestop__item onestop__item--optional" role="listitem">
+        <span class="onestop__num">03</span>
+        <span class="onestop__label">提携税理士のご紹介<small>希望者のみ・代理申告</small></span>
+      </div>
+    </div>
+    <p class="hero__note">
+      ※「ひとつの窓口」とは、経理代行・記帳代行から確定申告の準備までを一元的にご相談いただける、という意味です。
+      申告書の作成・提出(代理申告)は税理士の資格が必要な業務のため当方では行っておらず、ご希望の場合に限り提携税理士をご紹介します。
+    </p>
+
+    <div class="hero__cta">
+      <a href="#contact" class="btn btn--primary">お問い合わせはこちら</a>
+      <a href="#service" class="btn btn--ghost">料金を見る</a>
+    </div>
+
+    <div class="hero__stats">
+      <div class="stat">
+        <div class="stat__num">¥3,000<span>〜</span></div>
+        <div class="stat__label">お金の記録30件までの基本料金</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">4<span>種類+</span></div>
+        <div class="stat__label">対応会計ソフト(順次拡大中)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">NDA<span>締結</span></div>
+        <div class="stat__label">機密保持契約で情報をお守りします</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== コンセプト ==================== -->
+<section class="section concept" id="concept">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">CONCEPT</span>
+      <h2 class="section-title">「旅」と「記録」は、<br>もともと同じ言葉でした。</h2>
+    </div>
+
+    <div class="concept__etymology reveal">
+      <div class="concept__word">
+        <span class="en">Journey</span>
+        <span class="jp">旅</span>
+      </div>
+      <div class="concept__link">
+        <span class="arrow">=</span>
+        <span class="root">diurnus<br>(1日ごとの)</span>
+      </div>
+      <div class="concept__word">
+        <span class="en">Journal</span>
+        <span class="jp">日誌・記録</span>
+      </div>
+    </div>
+
+    <div class="concept__body reveal">
+      <p>
+        「Journey(旅)」と「Journal(日誌・記録)」。<br>
+        一見まったく別の言葉に見えるこの二つは、実はラテン語の「diurnus(1日ごとの)」という
+        同じ語源から派生した言葉です。
+      </p>
+      <p class="concept__highlight">「旅」と「記録」は、もともと同じ言葉だった。</p>
+      <p>
+        その気付きから生まれたのが「JourneyJournal」という屋号です。<br>
+        事業という旅路(Journey)には、日々の記録(Journal)が欠かせません。
+        私たちは、その一日一日の記録づくりに、そっと寄り添うパートナーでありたいと考えています。
+      </p>
+      <h3 class="concept__subhead">個人事業主・夜職(キャバクラ・ホスト)の方の経理代行にも</h3>
+      <p>
+        特に、キャバクラ・ホストなど夜のお仕事(夜職)をされている個人事業主の方にとって、
+        日々の売上や経費を正確に記録することは、簡単ではないかもしれません。
+        JourneyJournalは、そうした日々のお金の記録づくり(経理代行・記帳代行)をサポートし、確かな記録という「地図」を
+        一緒につくっていくことを大切にしています。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== サービス・料金 ==================== -->
+<section class="section section--alt" id="service">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">SERVICE & PRICE</span>
+      <h2 class="section-title">経理代行・記帳代行の料金プラン</h2>
+      <p class="section-lead">
+        経理代行・記帳代行から確定申告の入力サポートまで、必要な分だけシンプルな料金体系でご依頼いただけます。
+        代理申告(税理士業務)が必要な場合は、提携税理士をご紹介します。
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card reveal">
+        <div class="card__num">01</div>
+        <div class="card__title">基本料金</div>
+        <div class="card__price">¥3,000 <small>/ 30件まで</small></div>
+        <p class="card__desc">日々のお金の記録(レシート・領収書・入出金)の整理・入力に対応いたします。まずはこちらが基本となる料金です。</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card__num">02</div>
+        <div class="card__title">追加料金</div>
+        <div class="card__price">+¥2,500 <small>/ 50件ごと</small></div>
+        <p class="card__desc">
+          まとめてのご依頼(年間分など)も歓迎です。記録の件数に応じてお見積りいたします。
+        </p>
+        <p class="card__note">1年分をまとめてご依頼いただく場合、追加料金なしで年間のお金の記録のチェックまで行います。</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card__num">03</div>
+        <div class="card__title">期末調整の記録</div>
+        <div class="card__price">+¥10,000</div>
+        <p class="card__desc">
+          決算に向けた、減価償却費・未払費用・前払費用・棚卸資産などの調整項目の記録に対応可能です。
+        </p>
+        <p class="card__note">※決算書・申告書の作成、税務相談は行っておりません。</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card__num">04</div>
+        <div class="card__title">データ化対応</div>
+        <div class="card__price">+¥2,500 <small>/ 50件</small></div>
+        <p class="card__desc">
+          紙・コピー・PDF明細など、データでのご準備が難しい場合の対応です。
+        </p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card__num">05</div>
+        <div class="card__title">申告補助(確定申告の入力サポート)</div>
+        <div class="card__price">¥50,000 <small>/ 1件</small></div>
+        <p class="card__desc">
+          日々の記帳データをもとに、確定申告の入力操作(e-Tax)を横について一緒にサポートします。
+        </p>
+        <p class="card__note">※控除の判断や税額計算など、個別の税務相談は承っておりません。ご不明な点は税理士へご相談ください。</p>
+      </div>
+
+      <div class="card card--accent reveal">
+        <div class="card__num">06</div>
+        <div class="card__title">提携税理士への申告依頼(希望者のみ)</div>
+        <div class="card__price">要相談</div>
+        <p class="card__desc">
+          申告書の作成・提出(代理申告)まで一括でお任せしたい場合は、提携税理士をご紹介いたします。
+          内容に応じてお見積りいたします。
+        </p>
+      </div>
+    </div>
+
+    <p class="pricing-note reveal">
+      表示価格はすべて税別です。ご依頼内容やボリュームに応じて、事前にお見積りをご提示いたします。
+      ご不明な点はお気軽にお問い合わせください。
+    </p>
+
+    <div class="payment-info reveal">
+      <div class="payment-info__item">
+        <strong>お支払いについて</strong>
+        <p>前払い制(銀行振込)です。ご注文確定後にお伝えする期日までにお振込みいただき、ご入金確認後に業務へ着手いたします。</p>
+      </div>
+      <div class="payment-info__item">
+        <strong>お問い合わせへの返信</strong>
+        <p>目安として2営業日以内にご返信いたします。ご購入後のキャンセル(返金)は性質上お受けできませんので、あらかじめご了承ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 対応ソフト ==================== -->
+<section class="section" id="software">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">SOFTWARE</span>
+      <h2 class="section-title">経理代行・記帳代行の対応会計ソフト</h2>
+      <p class="section-lead">シェアの高い順に、以下の会計ソフトに対応しています。</p>
+    </div>
+
+    <div class="software">
+      <div class="software__item reveal">
+        <span class="software__rank">No.01</span>
+        <div class="software__icon">MF</div>
+        <div class="software__name">マネーフォワード</div>
+      </div>
+      <div class="software__item reveal">
+        <span class="software__rank">No.02</span>
+        <div class="software__icon">fr</div>
+        <div class="software__name">freee</div>
+      </div>
+      <div class="software__item reveal">
+        <span class="software__rank">No.03</span>
+        <div class="software__icon">FW</div>
+        <div class="software__name">フリーウェイ経理</div>
+      </div>
+      <div class="software__item reveal">
+        <span class="software__rank">No.04</span>
+        <div class="software__icon">弥</div>
+        <div class="software__name">弥生会計</div>
+      </div>
+    </div>
+
+    <p class="software__foot reveal">
+      上記以外のソフトをご利用の場合も、まずはご相談ください。対応可能かどうか確認のうえ、お見積りいたします。<br>
+      ※対応の際はログイン情報をお教えいただきます。
+    </p>
+  </div>
+</section>
+
+<!-- ==================== ご依頼の流れ ==================== -->
+<section class="section section--alt" id="flow">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">FLOW</span>
+      <h2 class="section-title">経理代行・記帳代行のご依頼の流れ</h2>
+      <p class="section-lead">お問い合わせから納品まで、迷わず進めるよう丁寧にご案内します。</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow__step reveal">
+        <div class="flow__num">01</div>
+        <div class="flow__content">
+          <div class="flow__title">お問い合わせ・ヒアリング</div>
+          <div class="flow__desc">お問い合わせフォームより、ご依頼内容やご利用中の会計ソフトなどをお伺いします。</div>
+        </div>
+      </div>
+      <div class="flow__step reveal">
+        <div class="flow__num">02</div>
+        <div class="flow__content">
+          <div class="flow__title">お見積り・ご契約</div>
+          <div class="flow__desc">記録の件数やご依頼内容に応じてお見積りをご提示し、内容にご納得いただいた上でご契約となります。NDA(機密保持契約)もあわせて締結いたします。</div>
+        </div>
+      </div>
+      <div class="flow__step reveal">
+        <div class="flow__num">03</div>
+        <div class="flow__content">
+          <div class="flow__title">資料のご提出</div>
+          <div class="flow__desc">領収書・レシートのPDF、通帳やクレジットカード明細のCSVデータなどをご提出いただきます。</div>
+        </div>
+      </div>
+      <div class="flow__step reveal">
+        <div class="flow__num">04</div>
+        <div class="flow__content">
+          <div class="flow__title">お金の記録の入力・チェック</div>
+          <div class="flow__desc">ご提出いただいた資料をもとにお金の記録の入力を行います。まとめてのご依頼の場合は年間の記録チェックまで行います。</div>
+        </div>
+      </div>
+      <div class="flow__step reveal">
+        <div class="flow__num">05</div>
+        <div class="flow__content">
+          <div class="flow__title">ご確認・納品</div>
+          <div class="flow__desc">会計ソフト上でご確認いただけます。ご希望に応じて、確定申告の入力サポート(e-Taxサポート)や提携税理士のご紹介も承ります。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== お知らせ ==================== -->
+<section class="section" id="news">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">NEWS</span>
+      <h2 class="section-title">お知らせ</h2>
+    </div>
+
+    <ul class="news-list reveal" id="newsList">
+      <li class="news-item">
+        <span class="news-item__date">2026.08.10</span>
+        <span class="news-item__tag" data-cat="サービス">サービス</span>
+        <span class="news-item__title">提携税理士のご紹介サービスを開始しました。</span>
+      </li>
+      <li class="news-item">
+        <span class="news-item__date">2026.08.05</span>
+        <span class="news-item__tag" data-cat="サービス">サービス</span>
+        <span class="news-item__title">対応会計ソフトに「フリーウェイ経理」を追加しました。</span>
+      </li>
+      <li class="news-item">
+        <span class="news-item__date">2026.08.01</span>
+        <span class="news-item__tag" data-cat="お知らせ">お知らせ</span>
+        <span class="news-item__title">JourneyJournal ホームページを公開いたしました。</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== よくある質問 ==================== -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">FAQ</span>
+      <h2 class="section-title">よくある質問</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>会計の知識が全くないのですが、依頼できますか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>はい、大丈夫です。レシートや明細をそのままお送りいただければ、記帳作業はすべてこちらで対応いたします。</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>領収書やレシートは、どうやって渡せばいいですか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>スキャンしてPDF化したもの、または通帳・クレジットカード明細のCSVデータでのご提出をお願いしております。紙のままでのご提出も対応可能です(別途料金)。</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>会計ソフトを持っていないのですが大丈夫ですか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>マネーフォワード・freee・フリーウェイ経理・弥生会計など、ご希望に応じて対応いたします。まずはご相談ください。</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>支払いのタイミングはいつですか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>前払い制となっております。ご注文確定後、銀行振込にてお支払いいただき、ご入金確認後に業務を開始いたします。</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>どのくらいの期間で対応してもらえますか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>依頼内容や記録の件数によって異なるため、お問い合わせ時に個別にご案内いたします。</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>秘密は守ってもらえますか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>機密保持契約(NDA)を締結しており、お預かりした情報を外部に漏らすことは一切ございません。安心してご依頼ください。</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>確定申告もお願いできますか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>申告書の作成・提出(代理申告)は税理士の資格が必要な業務のため、当方では承っておりません。確定申告の入力サポート(e-Taxの操作サポート)、または提携税理士のご紹介で対応可能です。</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary><span class="qa-badge">Q</span>「ひとつの窓口でご相談いただけます」とは、申告まで御社で完結するという意味ですか?</summary>
+        <div class="faq-item__a"><span class="qa-badge qa-badge--a">A</span>いいえ、経理代行・記帳代行から確定申告の準備・入力サポートまでのご相談窓口を一つにまとめる、という意味です。申告書の作成・提出(代理申告)は税理士の資格が必要な業務のため当方では行っておらず、必要な場合はご希望に応じて提携税理士をご紹介します。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ご依頼にあたって ==================== -->
+<section class="section section--alt" id="notice">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">NOTICE</span>
+      <h2 class="section-title">ご依頼にあたって</h2>
+    </div>
+
+    <div class="notice-grid">
+      <div class="notice-box reveal">
+        <div class="notice-box__head">
+          <span class="notice-box__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8L12 3z" fill="currentColor"/></svg>
+          </span>
+          <div class="notice-box__title">ご依頼にあたってのお願い</div>
+        </div>
+        <ul>
+          <li>ご依頼分・ご提出分はすべて入力いたします。プライベートご利用分は、事前に除外いただくか、分かるようご記載ください。</li>
+          <li>書類を郵送でご送付いただく場合、郵送中の紛失や汚損については責任を負いかねます。可能な限りデータでのご提出にご協力ください。</li>
+          <li>クレジットカードで決済された領収書やレシートは、二重計上防止のため別にしてお送りください。</li>
+          <li>ご購入後のキャンセル(返金)は仕組み上お受けできかねます。あらかじめご了承ください。</li>
+        </ul>
+      </div>
+
+      <div class="notice-box reveal">
+        <div class="notice-box__head">
+          <span class="notice-box__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </span>
+          <div class="notice-box__title">お預かりする情報の取り扱いについて</div>
+        </div>
+        <p class="lead">機密保持契約(NDA)を締結しており、以下をお約束いたします。</p>
+        <ul>
+          <li>お預かりした情報を外部に漏らさないこと</li>
+          <li>お取引以外の目的で使用しないこと</li>
+          <li>第三者への開示・共有を行わないこと</li>
+        </ul>
+        <p class="notice-box__foot">本人確認済みの事業者として、安心してご依頼いただけるよう努めております。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== お問い合わせ ==================== -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">CONTACT</span>
+      <h2 class="section-title">お問い合わせ</h2>
+      <p class="section-lead">ご相談・お見積りは無料です。お気軽にご連絡ください。</p>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-row form-row--split">
+        <div>
+          <label class="form-label" for="name">お名前<span class="required">必須</span></label>
+          <input class="form-control" type="text" id="name" name="name" placeholder="山田 花子" required>
+        </div>
+        <div>
+          <label class="form-label" for="company">会社名・屋号</label>
+          <input class="form-control" type="text" id="company" name="company" placeholder="任意">
+        </div>
+      </div>
+
+      <div class="form-row form-row--split">
+        <div>
+          <label class="form-label" for="email">メールアドレス<span class="required">必須</span></label>
+          <input class="form-control" type="email" id="email" name="email" placeholder="example@mail.com" required>
+        </div>
+        <div>
+          <label class="form-label" for="tel">電話番号</label>
+          <input class="form-control" type="tel" id="tel" name="tel" placeholder="任意">
+        </div>
+      </div>
+
+      <div class="form-row form-row--split">
+        <div>
+          <label class="form-label" for="service">ご興味のあるサービス</label>
+          <select class="form-control" id="service" name="service">
+            <option value="経理代行・記帳代行">経理代行・記帳代行</option>
+            <option value="申告補助">申告補助(確定申告の入力サポート)</option>
+            <option value="提携税理士紹介">提携税理士紹介(代理申告)</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label" for="budget">ご予算感</label>
+          <select class="form-control" id="budget" name="budget">
+            <option value="〜5,000円">〜5,000円</option>
+            <option value="5,000〜10,000円">5,000〜10,000円</option>
+            <option value="10,000〜30,000円">10,000〜30,000円</option>
+            <option value="30,000円〜">30,000円〜</option>
+            <option value="相談しながら決めたい">相談しながら決めたい</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="message">ご相談内容<span class="required">必須</span></label>
+        <textarea class="form-control" id="message" name="message" placeholder="現在のご状況やご相談内容をご記入ください" required></textarea>
+      </div>
+
+      <div class="form-row">
+        <button type="submit" class="btn btn--primary btn--block" id="contactSubmit">送信する</button>
+        <p class="form-status" id="contactStatus"></p>
+      </div>
+
+      <p class="form-note">
+        送信いただいた内容は、お問い合わせへの回答以外の目的では使用いたしません。<br>
+        フォームは Formspree を利用しています。
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- ==================== フッター ==================== -->
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <a href="#top" class="brand">JourneyJournal</a>
+    <div class="site-footer__links">
+      <a href="#service">サービス・料金</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#notice">ご依頼にあたって</a>
+      <a href="#contact">お問い合わせ</a>
+      <a href="tokushoho.html">特定商取引法に基づく表記</a>
+    </div>
+    <span>&copy; 2026 JourneyJournal</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script type="module" src="js/news.js"></script>
+</body>
+</html>
