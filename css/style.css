@@ -62,6 +62,7 @@ button { font-family: inherit; cursor: pointer; }
 .section {
   padding: 96px 0;
   position: relative;
+  scroll-margin-top: 88px;
 }
 .section--alt { background: var(--paper); }
 
@@ -1000,10 +1001,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .nav__list a { display: block; padding: 12px 0; border-bottom: 1px solid var(--line); }
   .nav__cta { padding: 16px 24px 0; }
 
-  .hero { padding: 140px 0 88px; }
+  .hero { padding: 132px 0 72px; }
   .hero__stats { grid-template-columns: 1fr; gap: 24px; max-width: 320px; }
   .hero__compass { width: 300px; opacity: 0.12; }
-  .hero__onestop { flex-direction: column; align-items: flex-start; padding: 18px 20px; }
+  .hero__onestop { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 22px; padding: 16px 18px; }
+  .onestop__item { flex: 0 1 auto; }
   .onestop__arrow { display: none; }
 
   .concept__etymology { grid-template-columns: 1fr; }
@@ -1028,6 +1030,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 @media (max-width: 560px) {
   .section { padding: 72px 0; }
   .section-head { margin-bottom: 40px; }
+
+  .hero { padding: 116px 0 56px; }
+  .hero__compass { width: 220px; opacity: 0.1; }
+  .hero__onestop { gap: 8px; margin-top: 20px; padding: 14px 16px; }
 }
 
 /* ==========================================================================
