@@ -461,6 +461,47 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ==========================================================================
+   代表者紹介
+   ========================================================================== */
+.profile-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 44px;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 44px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.profile-card__icon {
+  flex: 0 0 132px;
+  width: 132px;
+}
+.profile-card__icon svg { width: 100%; height: auto; }
+.profile-card__body { flex: 1; min-width: 0; }
+.profile-card__lead {
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--night-800);
+  margin-bottom: 20px;
+}
+.profile-card__body p {
+  margin-bottom: 20px;
+  color: var(--ink-600);
+  font-size: 0.92rem;
+}
+.profile-card__body p:last-child { margin-bottom: 0; }
+.profile-card__note {
+  margin-top: 4px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line);
+  color: var(--night-800) !important;
+  font-weight: 500;
+}
+
+/* ==========================================================================
    サービス・料金カード
    ========================================================================== */
 .cards {
@@ -1010,6 +1051,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
   .concept__etymology { grid-template-columns: 1fr; }
   .concept__link { transform: rotate(90deg); }
+
+  .profile-card { flex-direction: column; align-items: center; text-align: center; padding: 32px 26px; gap: 22px; }
+  .profile-card__icon { flex-basis: auto; width: 104px; }
 
   .cards { grid-template-columns: 1fr; }
   .software { grid-template-columns: repeat(2, 1fr); }
