@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /column/
 Disallow: /admin.html
 
 Sitemap: https://yudai-hatano.github.io/journeyjournal/sitemap.xml

@@ -9,6 +9,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // TODO: Firebaseコンソール > プロジェクトの設定 > マイアプリ から取得した値に置き換えてください
 const firebaseConfig = {
@@ -27,11 +28,13 @@ export const isFirebaseConfigured = firebaseConfig.apiKey !== "YOUR_API_KEY";
 let app = null;
 let db = null;
 let auth = null;
+let firestore = null;
 
 if (isFirebaseConfigured) {
   app = initializeApp(firebaseConfig);
   db = getDatabase(app);
   auth = getAuth(app);
+  firestore = getFirestore(app); // コラム機能(Firestore)用。お知らせは引き続きRealtime Databaseを使用
 }
 
-export { app, db, auth };
+export { app, db, auth, firestore };

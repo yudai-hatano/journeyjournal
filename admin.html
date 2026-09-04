@@ -118,6 +118,56 @@
     <ul id="adminNewsList" class="admin-news-list"></ul>
   </section>
 
+  <!-- コラム管理 -->
+  <section id="columnFormPanel" class="admin-panel is-hidden">
+    <h2 id="columnFormTitle">コラムを新規追加</h2>
+    <form id="columnForm">
+      <input type="hidden" id="columnId">
+      <div class="form-row">
+        <label for="columnTitleInput">タイトル</label>
+        <input type="text" id="columnTitleInput" required>
+      </div>
+      <div class="form-row">
+        <label for="columnBodyInput">本文(改行はそのまま公開ページに反映されます)</label>
+        <textarea id="columnBodyInput" style="min-height:220px;" required></textarea>
+      </div>
+      <div class="form-row" style="display:flex; gap:16px;">
+        <div style="flex:1;">
+          <label for="columnCategoryInput">カテゴリ</label>
+          <input type="text" id="columnCategoryInput" list="columnCategoryOptions" placeholder="例:基礎知識" required>
+          <datalist id="columnCategoryOptions">
+            <option value="基礎知識">
+            <option value="夜職向け">
+          </datalist>
+        </div>
+        <div style="flex:1;">
+          <label for="columnPublishDateInput">公開日</label>
+          <input type="date" id="columnPublishDateInput" required>
+        </div>
+      </div>
+      <div class="form-row" style="display:flex; gap:16px;">
+        <div style="flex:1;">
+          <label for="columnSlugInput">スラッグ(URL用の識別子。半角英小文字・数字・ハイフン)</label>
+          <input type="text" id="columnSlugInput" pattern="[a-z0-9\-]+" placeholder="例:keihi-kihon" required>
+        </div>
+        <div style="flex:1;">
+          <label for="columnOrderInput">表示順(任意・手動で並び替えたい場合のみ数値を入力)</label>
+          <input type="number" id="columnOrderInput" step="1">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn--primary">保存する</button>
+        <button type="button" id="resetColumnFormBtn" class="btn btn--outline is-hidden">新規作成に戻す</button>
+      </div>
+      <p id="columnFormError" class="error-text"></p>
+    </form>
+  </section>
+
+  <section id="columnListPanel" class="admin-panel is-hidden">
+    <h2>投稿済みのコラム</h2>
+    <ul id="adminColumnList" class="admin-news-list"></ul>
+  </section>
+
   <a href="index.html" class="back-link">&larr; トップページへ戻る</a>
 </div>
 
@@ -126,10 +176,11 @@
   document.addEventListener("DOMContentLoaded", () => {
     const observer = new MutationObserver(() => {
       const adminSection = document.getElementById("adminSection");
-      const listPanel = document.getElementById("newsListPanel");
-      if (adminSection && listPanel) {
-        listPanel.classList.toggle("is-hidden", adminSection.classList.contains("is-hidden"));
-      }
+      const isHidden = adminSection ? adminSection.classList.contains("is-hidden") : true;
+      ["newsListPanel", "columnFormPanel", "columnListPanel"].forEach((id) => {
+        const panel = document.getElementById(id);
+        if (panel) panel.classList.toggle("is-hidden", isHidden);
+      });
     });
     const adminSection = document.getElementById("adminSection");
     if (adminSection) observer.observe(adminSection, { attributes: true, attributeFilter: ["class"] });

@@ -1,18 +1,22 @@
 # JourneyJournal ホームページ
 
-記帳代行サービス「JourneyJournal」の公開用静的サイトです。HTML / CSS / JavaScript のみで構成されており、GitHub Pages でそのまま公開できます。お知らせ機能のみ Firebase(Realtime Database + Authentication)と連携します。
+記帳代行サービス「JourneyJournal」の公開用静的サイトです。HTML / CSS / JavaScript のみで構成されており、GitHub Pages でそのまま公開できます。お知らせ機能は Firebase Realtime Database、コラム機能は Firebase Firestore と連携します(いずれも Authentication で管理者ログインを行います)。
 
 ## ファイル構成
 
 ```
 journeyjournal/
-├── index.html          トップページ(全セクション)
-├── admin.html          お知らせ管理画面(管理者ログイン後のみ操作可)
-├── css/style.css        全体スタイル
-├── js/main.js            ナビゲーション・スクロールアニメーション・お問い合わせフォーム送信
-├── js/news.js            トップページのお知らせをFirebaseから取得表示
-├── js/admin.js           管理画面のログイン・お知らせCRUD処理
-└── js/firebase-config.js Firebase設定(要:ご自身の値に置き換え)
+├── index.html             トップページ(全セクション)
+├── admin.html             管理画面(お知らせ・コラム。管理者ログイン後のみ操作可)
+├── column/index.html       コラム一覧ページ(Firestoreから公開日順に取得)
+├── column/post.html        コラム記事詳細ページ(?slug=xxx で記事を取得)
+├── css/style.css           全体スタイル
+├── js/main.js              ナビゲーション・スクロールアニメーション・お問い合わせフォーム送信
+├── js/news.js              トップページのお知らせをFirebase(Realtime Database)から取得表示
+├── js/column-list.js       コラム一覧をFirestoreから取得表示
+├── js/column-post.js       コラム記事詳細をFirestoreから取得表示
+├── js/admin.js             管理画面のログイン・お知らせ/コラムCRUD処理
+└── js/firebase-config.js  Firebase設定(要:ご自身の値に置き換え)
 ```
 
 ## 公開前に必ず行う設定
@@ -35,8 +39,9 @@ journeyjournal/
 
 1. https://console.firebase.google.com でプロジェクトを新規作成します。
 2. 「Authentication」→「Sign-in method」で **メール/パスワード** を有効化し、「Users」タブから管理者用のアカウント(メール・パスワード)を1つ作成します。
-3. 「Realtime Database」を作成します(リージョンは任意)。
-4. 「プロジェクトの設定」→「マイアプリ」で ウェブアプリを追加し、表示された `firebaseConfig` の値を `js/firebase-config.js` にコピーします。
+3. 「Realtime Database」を作成します(リージョンは任意)。お知らせ機能で使用します。
+3-2. 「Firestore Database」も作成します(リージョンは任意)。コラム機能で使用します。
+4. 「プロジェクトの設定」→「マイアプリ」で ウェブアプリを追加し、表示された `firebaseConfig` の値を `js/firebase-config.js` にコピーします(Realtime DatabaseとFirestoreは同じ設定値で両方使えます)。
 
    ```js
    const firebaseConfig = {
@@ -63,9 +68,23 @@ journeyjournal/
    }
    ```
 
-6. `admin.html` にアクセスし、作成した管理者アカウントでログインすると、お知らせの追加・編集・削除ができます。トップページの「お知らせ」セクションにリアルタイムで反映されます。
+5-2. Firestore Database の「ルール」タブで、以下のようなルールを設定します(`columns` コレクションを誰でも閲覧可・書き込みはログインした管理者のみに制限)。
 
-   > 管理者は1名を想定した設計です。複数人での運用が必要になった場合は、Realtime Databaseのルールをユーザーごとに調整してください。
+   ```
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /columns/{document} {
+         allow read: if true;
+         allow write: if request.auth != null;
+       }
+     }
+   }
+   ```
+
+6. `admin.html` にアクセスし、作成した管理者アカウントでログインすると、お知らせ・コラムそれぞれの追加・編集・削除ができます。お知らせはトップページの「お知らせ」セクションに、コラムは `/column/index.html` にリアルタイムで反映されます。
+
+   > 管理者は1名を想定した設計です。複数人での運用が必要になった場合は、Realtime Database・Firestoreのルールをユーザーごとに調整してください。
 
 ## GitHub Pages での公開
 
