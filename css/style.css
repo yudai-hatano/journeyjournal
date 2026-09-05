@@ -1029,6 +1029,15 @@ button { font-family: inherit; cursor: pointer; }
 .column-article__title { display: block; font-size: 1.55rem; font-weight: 700; color: var(--night-800); line-height: 1.6; margin-bottom: 12px; }
 .column-article__date { display: block; font-family: var(--font-accent); font-size: 0.9rem; color: var(--ink-400); padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
 .column-article__body { white-space: pre-line; font-size: 0.95rem; line-height: 1.95; color: var(--ink-600); }
+.column-article__body p { margin: 0 0 20px; }
+.column-article__body p:last-child { margin-bottom: 0; }
+.column-article__body h2, .column-article__body h3 { white-space: normal; font-weight: 700; color: var(--night-800); line-height: 1.6; margin: 32px 0 14px; }
+.column-article__body h2 { font-size: 1.25rem; }
+.column-article__body h3 { font-size: 1.08rem; }
+.column-article__body ul, .column-article__body ol { margin: 0 0 20px; padding-left: 1.4em; }
+.column-article__body li { margin-bottom: 8px; }
+.column-article__body strong, .column-article__body b { font-weight: 700; color: var(--night-800); }
+.column-article__body u { text-decoration: underline; }
 .column-article__cta {
   text-align: center;
   margin-top: 40px;

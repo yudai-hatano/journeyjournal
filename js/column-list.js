@@ -54,8 +54,18 @@ if (isFirebaseConfigured && firestore && grid) {
 
 function makeExcerpt(body) {
   if (!body) return "";
-  const flat = body.replace(/\s+/g, " ").trim();
+  const text = stripHtml(body);
+  const flat = text.replace(/\s+/g, " ").trim();
   return flat.length > 70 ? flat.slice(0, 70) + "…" : flat;
+}
+
+function stripHtml(html) {
+  const div = document.createElement("div");
+  // 一覧のカードにはテキストのみを抜粋表示するため、装飾タグを除去する(表示はtextContent経由のみ)
+  div.innerHTML = window.DOMPurify
+    ? window.DOMPurify.sanitize(html, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] })
+    : "";
+  return div.textContent || html;
 }
 
 function formatDate(value) {

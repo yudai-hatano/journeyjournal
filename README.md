@@ -86,6 +86,8 @@ journeyjournal/
 
    > 管理者は1名を想定した設計です。複数人での運用が必要になった場合は、Realtime Database・Firestoreのルールをユーザーごとに調整してください。
 
+7. コラムの本文はリッチテキストエディタ([Quill](https://quilljs.com/) をCDN経由で読み込み)で入力し、HTML形式で保存されます。対応する装飾は太字・下線・文字色(4色)・見出し(大/中)・箇条書きです。公開ページ側では [DOMPurify](https://github.com/cure53/DOMPurify)(CDN経由)でサニタイズしてから表示するため、許可タグ以外(スクリプト等)は自動的に除去されます。プレーンテキストのまま登録した記事もそのまま表示できます。
+
 ## GitHub Pages での公開
 
 1. このフォルダの中身をGitHubリポジトリにpushします。

@@ -7,6 +7,7 @@
 <title>管理画面 | JourneyJournal</title>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 <style>
   body { background: var(--night-900); min-height: 100vh; }
   .admin-wrap { max-width: 760px; margin: 0 auto; padding: 64px 24px 100px; }
@@ -48,6 +49,52 @@
   .admin-news-item__actions { display: flex; gap: 8px; }
   .admin-news-empty { padding: 24px 2px; color: var(--ink-400); font-size: 0.85rem; text-align: center; }
   .back-link { display: block; text-align: center; margin-top: 28px; color: var(--gold-400); font-size: 0.85rem; }
+
+  /* リッチテキストエディタ(Quill)のテーマ調整 */
+  .ql-toolbar.ql-snow {
+    border: 1px solid var(--line);
+    border-bottom: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: var(--cream-100);
+  }
+  .ql-container.ql-snow {
+    border: 1px solid var(--line);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    background: var(--cream-50);
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .ql-editor { min-height: 220px; color: var(--ink-900); line-height: 1.85; }
+  .ql-editor.ql-blank::before { color: var(--ink-400); font-style: normal; }
+  .ql-snow .ql-picker { color: var(--ink-600); }
+  .ql-snow .ql-stroke { stroke: var(--ink-600); }
+  .ql-snow .ql-fill { fill: var(--ink-600); }
+  .ql-snow.ql-toolbar button:hover,
+  .ql-snow.ql-toolbar button.ql-active,
+  .ql-snow .ql-picker-label:hover,
+  .ql-snow .ql-picker-item:hover,
+  .ql-snow .ql-picker-label.ql-active {
+    color: var(--gold-500);
+  }
+  .ql-snow.ql-toolbar button:hover .ql-stroke,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+  .ql-snow .ql-picker-label:hover .ql-stroke,
+  .ql-snow .ql-picker-label.ql-active .ql-stroke {
+    stroke: var(--gold-500);
+  }
+  /* 見出しドロップダウンの表示ラベルを日本語化 */
+  .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+  .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+    content: "見出し(大)";
+  }
+  .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
+  .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+    content: "見出し(中)";
+  }
+  .ql-snow .ql-picker.ql-header .ql-picker-label:not([data-value])::before,
+  .ql-snow .ql-picker.ql-header .ql-picker-item:not([data-value])::before {
+    content: "標準テキスト";
+  }
 </style>
 </head>
 <body>
@@ -128,8 +175,9 @@
         <input type="text" id="columnTitleInput" required>
       </div>
       <div class="form-row">
-        <label for="columnBodyInput">本文(改行はそのまま公開ページに反映されます)</label>
-        <textarea id="columnBodyInput" style="min-height:220px;" required></textarea>
+        <label for="columnBodyEditor">本文</label>
+        <div id="columnBodyEditor" class="rte-editor"></div>
+        <input type="hidden" id="columnBodyInput">
       </div>
       <div class="form-row" style="display:flex; gap:16px;">
         <div style="flex:1;">
@@ -186,6 +234,7 @@
     if (adminSection) observer.observe(adminSection, { attributes: true, attributeFilter: ["class"] });
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 <script type="module" src="js/admin.js"></script>
 </body>
 </html>

@@ -59,6 +59,28 @@ const columnOrderInput = document.getElementById("columnOrderInput");
 const resetColumnFormBtn = document.getElementById("resetColumnFormBtn");
 const adminColumnList = document.getElementById("adminColumnList");
 const columnFormError = document.getElementById("columnFormError");
+const columnBodyEditorEl = document.getElementById("columnBodyEditor");
+
+// 本文リッチテキストエディタ(Quill)。太字・下線・文字色・見出し(大/中)・箇条書きのみに限定
+let columnQuill = null;
+if (columnBodyEditorEl && window.Quill) {
+  columnQuill = new Quill(columnBodyEditorEl, {
+    theme: "snow",
+    placeholder: "本文を入力してください…",
+    modules: {
+      toolbar: [
+        ["bold", "underline"],
+        [{ color: ["#232733", "#c0392b", "#2266aa", "#767b8a"] }],
+        [{ header: [2, 3, false] }],
+        [{ list: "bullet" }]
+      ]
+    }
+  });
+
+  columnQuill.on("text-change", () => {
+    columnBodyInput.value = columnQuill.getText().trim() === "" ? "" : columnQuill.root.innerHTML;
+  });
+}
 
 if (!isFirebaseConfigured) {
   configWarning.classList.add("is-visible");
@@ -127,6 +149,11 @@ if (!isFirebaseConfigured) {
     const slug = columnSlugInput.value.trim();
     if (!/^[a-z0-9-]+$/.test(slug)) {
       columnFormError.textContent = "スラッグは半角英小文字・数字・ハイフンのみ使用できます。";
+      return;
+    }
+
+    if (columnQuill && columnQuill.getText().trim() === "") {
+      columnFormError.textContent = "本文を入力してください。";
       return;
     }
 
@@ -230,10 +257,16 @@ function escapeHtml(str) {
 function resetColumnForm() {
   columnIdInput.value = "";
   columnForm.reset();
+  if (columnQuill) columnQuill.setText("");
   columnPublishDateInput.value = new Date().toISOString().slice(0, 10);
   columnFormTitle.textContent = "コラムを新規追加";
   resetColumnFormBtn.classList.add("is-hidden");
   columnFormError.textContent = "";
+}
+
+// 装飾タグを含まない旧・プレーンテキスト記事かどうかの判定(改行を<br>に変換してエディタへ読み込むため)
+function looksLikeHtml(str) {
+  return /<[a-z][\s\S]*>/i.test(str);
 }
 
 function watchColumns() {
@@ -266,7 +299,14 @@ function watchColumns() {
       li.querySelector('[data-action="edit"]').addEventListener("click", () => {
         columnIdInput.value = item.id;
         columnTitleInput.value = item.title || "";
-        columnBodyInput.value = item.body || "";
+        const body = item.body || "";
+        columnBodyInput.value = body;
+        if (columnQuill) {
+          // 旧・プレーンテキスト記事は改行を<br>に変換してから読み込み、見た目の改行を保持する
+          const html = looksLikeHtml(body) ? body : body.replace(/\n/g, "<br>");
+          columnQuill.setText("");
+          columnQuill.clipboard.dangerouslyPasteHTML(html);
+        }
         columnCategoryInput.value = item.category || "";
         columnPublishDateInput.value = item.publishDate || "";
         columnSlugInput.value = item.slug || "";
