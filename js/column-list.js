@@ -1,17 +1,22 @@
 // ============================================================================
 // コラム一覧(/column/index.html)公開側スクリプト
-// Firestore の columns コレクションから公開日順に取得し、カード一覧を表示します。
+// Firestore の columns コレクションから、公開中(status: "published")の記事のみを
+// 公開日順に取得し、カード一覧を表示します。下書き(status: "draft")は表示しません。
 // Firebase未設定・データ0件の間は、準備中メッセージをそのまま表示します。
 // ============================================================================
 
 import { firestore, isFirebaseConfigured } from "./firebase-config.js";
-import { collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { collection, query, where, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const grid = document.getElementById("columnGrid");
 const emptyEl = document.getElementById("columnEmpty");
 
 if (isFirebaseConfigured && firestore && grid) {
-  const columnsRef = query(collection(firestore, "columns"), orderBy("publishDate", "desc"));
+  const columnsRef = query(
+    collection(firestore, "columns"),
+    where("status", "==", "published"),
+    orderBy("publishDate", "desc")
+  );
 
   onSnapshot(columnsRef, (snapshot) => {
     grid.querySelectorAll(".column-card").forEach((el) => el.remove());

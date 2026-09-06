@@ -1,0 +1,11 @@
+# Firebase サービスアカウントキー(機密情報・絶対にコミットしない)
+serviceAccountKey.json
+*serviceAccountKey*.json
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

@@ -50,6 +50,7 @@ const configWarning = document.getElementById("configWarning");
 const columnForm = document.getElementById("columnForm");
 const columnFormTitle = document.getElementById("columnFormTitle");
 const columnIdInput = document.getElementById("columnId");
+const columnStatusInput = document.getElementById("columnStatusInput");
 const columnTitleInput = document.getElementById("columnTitleInput");
 const columnBodyInput = document.getElementById("columnBodyInput");
 const columnCategoryInput = document.getElementById("columnCategoryInput");
@@ -57,7 +58,8 @@ const columnPublishDateInput = document.getElementById("columnPublishDateInput")
 const columnSlugInput = document.getElementById("columnSlugInput");
 const columnOrderInput = document.getElementById("columnOrderInput");
 const resetColumnFormBtn = document.getElementById("resetColumnFormBtn");
-const adminColumnList = document.getElementById("adminColumnList");
+const adminColumnDraftList = document.getElementById("adminColumnDraftList");
+const adminColumnPublishedList = document.getElementById("adminColumnPublishedList");
 const columnFormError = document.getElementById("columnFormError");
 const columnBodyEditorEl = document.getElementById("columnBodyEditor");
 
@@ -164,6 +166,7 @@ if (!isFirebaseConfigured) {
       publishDate: columnPublishDateInput.value || new Date().toISOString().slice(0, 10),
       slug,
       order: columnOrderInput.value === "" ? 0 : Number(columnOrderInput.value),
+      status: columnStatusInput.value === "draft" ? "draft" : "published",
       updatedAt: Date.now()
     };
 
@@ -256,6 +259,7 @@ function escapeHtml(str) {
 
 function resetColumnForm() {
   columnIdInput.value = "";
+  columnStatusInput.value = "published";
   columnForm.reset();
   if (columnQuill) columnQuill.setText("");
   columnPublishDateInput.value = new Date().toISOString().slice(0, 10);
@@ -269,64 +273,117 @@ function looksLikeHtml(str) {
   return /<[a-z][\s\S]*>/i.test(str);
 }
 
+// statusフィールドが無い旧データは、この機能追加前にすべて公開扱いだったものとして扱う
+function columnStatusOf(item) {
+  return item.status === "draft" ? "draft" : "published";
+}
+
+function renderColumnItem(item) {
+  const isDraft = columnStatusOf(item) === "draft";
+  const li = document.createElement("li");
+  li.className = "admin-news-item";
+  li.innerHTML = `
+    <div class="admin-news-item__main">
+      <span class="admin-news-item__date">${escapeHtml(item.publishDate || "")}</span>
+      <span class="admin-news-item__tag">${escapeHtml(item.category || "")}</span>
+      ${isDraft ? '<span class="admin-news-item__status">下書き</span>' : ""}
+      <span class="admin-news-item__title">${escapeHtml(item.title || "")}</span>
+    </div>
+    <div class="admin-news-item__actions">
+      ${isDraft ? '<button type="button" class="btn-mini btn-mini--accent" data-action="publish">公開する</button>' : ""}
+      <button type="button" class="btn-mini" data-action="edit">編集</button>
+      <button type="button" class="btn-mini btn-mini--danger" data-action="delete">削除</button>
+    </div>
+  `;
+
+  li.querySelector('[data-action="edit"]').addEventListener("click", () => {
+    columnIdInput.value = item.id;
+    columnStatusInput.value = columnStatusOf(item);
+    columnTitleInput.value = item.title || "";
+    const body = item.body || "";
+    columnBodyInput.value = body;
+    if (columnQuill) {
+      // 旧・プレーンテキスト記事は改行を<br>に変換してから読み込み、見た目の改行を保持する
+      const html = looksLikeHtml(body) ? body : body.replace(/\n/g, "<br>");
+      columnQuill.setText("");
+      columnQuill.clipboard.dangerouslyPasteHTML(html);
+    }
+    columnCategoryInput.value = item.category || "";
+    columnPublishDateInput.value = item.publishDate || "";
+    columnSlugInput.value = item.slug || "";
+    columnOrderInput.value = item.order ?? "";
+    columnFormTitle.textContent = isDraft ? "下書きを編集" : "コラムを編集";
+    resetColumnFormBtn.classList.remove("is-hidden");
+    columnForm.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  li.querySelector('[data-action="delete"]').addEventListener("click", async () => {
+    if (!confirm("このコラムを削除しますか?")) return;
+    try {
+      await deleteDoc(doc(firestore, "columns", item.id));
+    } catch (err) {
+      alert("削除に失敗しました: " + err.message);
+    }
+  });
+
+  const publishBtn = li.querySelector('[data-action="publish"]');
+  if (publishBtn) {
+    publishBtn.addEventListener("click", async () => {
+      if (!confirm("この下書きを公開しますか?")) return;
+      try {
+        await updateDoc(doc(firestore, "columns", item.id), { status: "published", updatedAt: Date.now() });
+      } catch (err) {
+        alert("公開に失敗しました: " + err.message);
+      }
+    });
+  }
+
+  return li;
+}
+
 function watchColumns() {
   const columnsRef = fsQuery(collection(firestore, "columns"), fsOrderBy("publishDate", "desc"));
 
   onSnapshot(columnsRef, (snapshot) => {
-    adminColumnList.innerHTML = "";
+    adminColumnDraftList.innerHTML = "";
+    adminColumnPublishedList.innerHTML = "";
 
     if (snapshot.empty) {
-      adminColumnList.innerHTML = '<li class="admin-news-empty">まだコラムがありません。</li>';
+      adminColumnDraftList.innerHTML = '<li class="admin-news-empty">下書きはありません。</li>';
+      adminColumnPublishedList.innerHTML = '<li class="admin-news-empty">公開中のコラムはありません。</li>';
       return;
     }
 
+    let draftCount = 0;
+    let publishedCount = 0;
+
     snapshot.forEach((docSnap) => {
-      const item = { id: docSnap.id, ...docSnap.data() };
-      const li = document.createElement("li");
-      li.className = "admin-news-item";
-      li.innerHTML = `
-        <div class="admin-news-item__main">
-          <span class="admin-news-item__date">${escapeHtml(item.publishDate || "")}</span>
-          <span class="admin-news-item__tag">${escapeHtml(item.category || "")}</span>
-          <span class="admin-news-item__title">${escapeHtml(item.title || "")}</span>
-        </div>
-        <div class="admin-news-item__actions">
-          <button type="button" class="btn-mini" data-action="edit">編集</button>
-          <button type="button" class="btn-mini btn-mini--danger" data-action="delete">削除</button>
-        </div>
-      `;
+      const data = docSnap.data();
+      const item = { id: docSnap.id, ...data };
+      const li = renderColumnItem(item);
+      if (columnStatusOf(item) === "draft") {
+        adminColumnDraftList.appendChild(li);
+        draftCount++;
+      } else {
+        adminColumnPublishedList.appendChild(li);
+        publishedCount++;
 
-      li.querySelector('[data-action="edit"]').addEventListener("click", () => {
-        columnIdInput.value = item.id;
-        columnTitleInput.value = item.title || "";
-        const body = item.body || "";
-        columnBodyInput.value = body;
-        if (columnQuill) {
-          // 旧・プレーンテキスト記事は改行を<br>に変換してから読み込み、見た目の改行を保持する
-          const html = looksLikeHtml(body) ? body : body.replace(/\n/g, "<br>");
-          columnQuill.setText("");
-          columnQuill.clipboard.dangerouslyPasteHTML(html);
+        // status未設定の旧データは、この機能追加前は全て公開扱いだったため
+        // 公開側の検索クエリ(status=="published")に一致するよう自動的に補完する
+        if (!("status" in data)) {
+          updateDoc(doc(firestore, "columns", item.id), { status: "published" }).catch((err) => {
+            console.error("旧コラムへのstatus補完に失敗しました:", err);
+          });
         }
-        columnCategoryInput.value = item.category || "";
-        columnPublishDateInput.value = item.publishDate || "";
-        columnSlugInput.value = item.slug || "";
-        columnOrderInput.value = item.order ?? "";
-        columnFormTitle.textContent = "コラムを編集";
-        resetColumnFormBtn.classList.remove("is-hidden");
-        columnForm.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-
-      li.querySelector('[data-action="delete"]').addEventListener("click", async () => {
-        if (!confirm("このコラムを削除しますか?")) return;
-        try {
-          await deleteDoc(doc(firestore, "columns", item.id));
-        } catch (err) {
-          alert("削除に失敗しました: " + err.message);
-        }
-      });
-
-      adminColumnList.appendChild(li);
+      }
     });
+
+    if (draftCount === 0) {
+      adminColumnDraftList.innerHTML = '<li class="admin-news-empty">下書きはありません。</li>';
+    }
+    if (publishedCount === 0) {
+      adminColumnPublishedList.innerHTML = '<li class="admin-news-empty">公開中のコラムはありません。</li>';
+    }
   }, (error) => {
     console.error("コラムの取得に失敗しました:", error);
   });

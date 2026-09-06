@@ -1,7 +1,8 @@
 // ============================================================================
 // コラム記事詳細(/column/post.html)公開側スクリプト
 // URLパラメータ ?slug=xxx を使って、Firestore の columns コレクションから
-// 該当する記事を1件取得して表示します。該当がない場合は「記事が見つかりません」と表示します。
+// 該当する記事を1件取得して表示します。status が "published" の記事のみが対象で、
+// 下書き(status: "draft")や該当がない場合は「記事が見つかりません」と表示します。
 // ============================================================================
 
 import { firestore, isFirebaseConfigured } from "./firebase-config.js";
@@ -26,7 +27,12 @@ async function init() {
   }
 
   try {
-    const q = query(collection(firestore, "columns"), where("slug", "==", slug), limit(1));
+    const q = query(
+      collection(firestore, "columns"),
+      where("slug", "==", slug),
+      where("status", "==", "published"),
+      limit(1)
+    );
     const snapshot = await getDocs(q);
 
     if (snapshot.empty) {
