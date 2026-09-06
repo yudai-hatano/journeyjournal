@@ -68,7 +68,7 @@ journeyjournal/
    }
    ```
 
-5-2. Firestore Database の「ルール」タブで、以下のようなルールを設定します(`columns` コレクションを誰でも閲覧可・書き込みはログインした管理者のみに制限)。
+5-2. Firestore Database の「ルール」タブで、以下のようなルールを設定します(`columns` コレクションを誰でも閲覧可・書き込みはログインした管理者のみに制限)。内容は `firestore.rules` にも同じものを置いています。
 
    ```
    rules_version = '2';

@@ -11,17 +11,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yudai-hatano.github.io/journeyjournal/column/keihi-kihon.html</loc>
+    <loc>https://yudai-hatano.github.io/journeyjournal/column/post.html?slug=keihi-kihon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yudai-hatano.github.io/journeyjournal/column/yofuku-ishou.html</loc>
+    <loc>https://yudai-hatano.github.io/journeyjournal/column/post.html?slug=yofuku-ishou</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <!-- Firestore連携の管理画面経由コラム(/column/post.html?slug=xxx)は今後の拡張用で、
-       現時点では未設定のため未使用・未登録です。設定後は個別記事のURLをここに追加してください。 -->
+  <!-- コラム記事はFirestore(admin.html経由)で管理する動的ページです。
+       新しい記事を公開したら、そのslugのURLをここに追加してください。 -->
   <url>
     <loc>https://yudai-hatano.github.io/journeyjournal/tokushoho.html</loc>
     <changefreq>yearly</changefreq>
