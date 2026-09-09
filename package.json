@@ -2,9 +2,10 @@
   "name": "journeyjournal-scripts",
   "private": true,
   "version": "1.0.0",
-  "description": "JourneyJournal 運用スクリプト(Firestoreへのコラム下書きアップロードなど)。サイト本体はビルド不要の静的HTML/CSS/JSです。",
+  "description": "JourneyJournal 運用スクリプト(コラム下書きアップロード・公開コラムの静的HTML生成)。サイト本体はビルド不要の静的HTML/CSS/JSです。",
   "scripts": {
-    "upload-draft": "node scripts/upload-draft.js"
+    "upload-draft": "node scripts/upload-draft.js",
+    "build-columns": "node scripts/build-column-pages.js"
   },
   "dependencies": {
     "firebase-admin": "^12.6.0"

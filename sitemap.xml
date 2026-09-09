@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- このファイルは scripts/build-column-pages.js により自動生成されます。直接編集しないでください。 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yudai-hatano.github.io/journeyjournal/</loc>
@@ -11,17 +12,35 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yudai-hatano.github.io/journeyjournal/column/post.html?slug=keihi-kihon</loc>
+    <loc>https://yudai-hatano.github.io/journeyjournal/column/shinkoku-bareru.html</loc>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yudai-hatano.github.io/journeyjournal/column/post.html?slug=yofuku-ishou</loc>
+    <loc>https://yudai-hatano.github.io/journeyjournal/column/taxi-douhan.html</loc>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <!-- コラム記事はFirestore(admin.html経由)で管理する動的ページです。
-       新しい記事を公開したら、そのslugのURLをここに追加してください。 -->
+  <url>
+    <loc>https://yudai-hatano.github.io/journeyjournal/column/biyouhi.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yudai-hatano.github.io/journeyjournal/column/yofuku-ishou.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yudai-hatano.github.io/journeyjournal/column/keihi-kihon.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
     <loc>https://yudai-hatano.github.io/journeyjournal/tokushoho.html</loc>
     <changefreq>yearly</changefreq>

@@ -3,72 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
 <title>コラム記事 | JourneyJournal</title>
-<meta name="description" id="pageDescription" content="JourneyJournalのコラム記事です。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2312203a'/%3E%3Ccircle cx='50' cy='50' r='46' fill='none' stroke='%23d9ab5c' stroke-width='3'/%3E%3Cpolygon points='50,20 58,50 50,80 42,50' fill='%23d9ab5c'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<!-- 旧URL(/column/post.html?slug=xxx)を、新しい静的記事ページ
+     (/column/xxx.html)へ転送するための互換用ページです。
+     記事本体は scripts/build-column-pages.js が生成します。 -->
+<script>
+  (function () {
+    var slug = "";
+    try {
+      slug = new URLSearchParams(window.location.search).get("slug") || "";
+    } catch (e) {
+      var m = window.location.search.match(/[?&]slug=([^&]+)/);
+      slug = m ? decodeURIComponent(m[1]) : "";
+    }
+    var target = /^[a-z0-9-]+$/.test(slug) ? "./" + slug + ".html" : "./index.html";
+    window.location.replace(target);
+  })();
+</script>
+<meta http-equiv="refresh" content="0; url=./index.html">
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
-<!-- ==================== ヘッダー ==================== -->
-<header class="site-header">
-  <div class="site-header__inner">
-    <a href="../index.html#top" class="brand">
-      <svg class="brand__mark" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="4"/><polygon points="50,18 60,50 50,82 40,50" fill="currentColor"/><circle cx="50" cy="50" r="4" fill="#fbf7ee"/></svg>
-      <span>
-        JourneyJournal
-        <span class="brand__sub">経理代行・記帳代行</span>
-      </span>
-    </a>
-    <nav class="nav" id="siteNav">
-      <ul class="nav__list">
-        <li><a href="../index.html#concept">コンセプト</a></li>
-        <li><a href="../index.html#profile">代表者紹介</a></li>
-        <li><a href="../index.html#service">サービス・料金</a></li>
-        <li><a href="../index.html#software">対応ソフト</a></li>
-        <li><a href="../index.html#flow">ご依頼の流れ</a></li>
-        <li><a href="../index.html#news">お知らせ</a></li>
-        <li><a href="index.html">コラム</a></li>
-        <li><a href="../index.html#faq">よくある質問</a></li>
-        <li><a href="../index.html#notice">ご依頼にあたって</a></li>
-      </ul>
-      <div class="nav__cta">
-        <a href="../index.html#contact" class="btn btn--outline btn--block">お問い合わせ</a>
-      </div>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<div class="container">
-  <div id="columnArticle" class="column-article">
-    <p class="column-loading">読み込み中...</p>
-  </div>
+<div class="container" style="padding: 140px 24px; text-align: center;">
+  <p>コラム記事ページは移動しました。</p>
+  <p><a class="btn btn--outline" href="./index.html">コラム一覧へ</a></p>
 </div>
-
-<!-- ==================== フッター ==================== -->
-<footer class="site-footer">
-  <div class="container site-footer__inner">
-    <a href="../index.html#top" class="brand">JourneyJournal</a>
-    <div class="site-footer__links">
-      <a href="../index.html#service">サービス・料金</a>
-      <a href="index.html">コラム</a>
-      <a href="../index.html#faq">よくある質問</a>
-      <a href="../index.html#notice">ご依頼にあたって</a>
-      <a href="../index.html#contact">お問い合わせ</a>
-      <a href="../tokushoho.html">特定商取引法に基づく表記</a>
-    </div>
-    <span>&copy; 2026 JourneyJournal</span>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-<script src="../js/main.js"></script>
-<script type="module" src="../js/column-post.js"></script>
 </body>
 </html>

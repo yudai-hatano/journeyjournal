@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- ============================================================
+  このファイルは scripts/build-column-pages.js による自動生成物です。
+  直接編集しないでください(次回ビルドで上書きされます)。
+  記事の編集は admin.html(Firestore)から行い、公開後に
+  npm run build-columns を実行して生成し直してください。
+============================================================ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>コラム | JourneyJournal</title>
 <meta name="description" content="経理・確定申告の基礎知識や、夜職(キャバクラ・ホスト)の方向けの経費の考え方などをお届けするJourneyJournalのコラムです。">
 <link rel="canonical" href="https://yudai-hatano.github.io/journeyjournal/column/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JourneyJournal">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://yudai-hatano.github.io/journeyjournal/column/">
+<meta property="og:title" content="コラム | JourneyJournal">
+<meta property="og:description" content="経理・確定申告の基礎知識や、夜職の方向けの経費の考え方などをお届けするJourneyJournalのコラムです。">
+<meta property="og:image" content="https://yudai-hatano.github.io/journeyjournal/assets/ogp.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="コラム | JourneyJournal">
+<meta name="twitter:image" content="https://yudai-hatano.github.io/journeyjournal/assets/ogp.svg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2312203a'/%3E%3Ccircle cx='50' cy='50' r='46' fill='none' stroke='%23d9ab5c' stroke-width='3'/%3E%3Cpolygon points='50,20 58,50 50,80 42,50' fill='%23d9ab5c'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,8 +70,37 @@
 </div>
 
 <div class="container">
-  <div class="column-grid reveal" id="columnGrid">
-    <p class="column-empty" id="columnEmpty">ただいまコラムを準備中です。公開まで今しばらくお待ちください。</p>
+  <div class="column-grid">
+    <a class="column-card" href="shinkoku-bareru.html">
+      <span class="column-card__tag">基礎知識</span>
+      <h2 class="column-card__title">確定申告、しなくてもバレないと思ってませんか?なぜバレるのか。</h2>
+      <p class="column-card__excerpt">確定申告、しなくてもバレないと思ってませんか? 国税庁が2025年12月に発表した最新データ。 「税務調査で申告漏れが見つかった時、 1件あ…</p>
+      <span class="column-card__date">2026.09.09</span>
+    </a>
+    <a class="column-card" href="taxi-douhan.html">
+      <span class="column-card__tag">夜職向け</span>
+      <h2 class="column-card__title">タクシー代・同伴・プレゼント代、実は経費になるものとならないものがある</h2>
+      <p class="column-card__excerpt">帰りのタクシー代、経費にできる? お客様から貰った場合はどうなる? 深夜の営業終わり。 タクシーで帰った経験、多いと思います。 「 これって…</p>
+      <span class="column-card__date">2026.09.04</span>
+    </a>
+    <a class="column-card" href="biyouhi.html">
+      <span class="column-card__tag">夜職向け</span>
+      <h2 class="column-card__title">美容費(ヘアセット・ネイル・エステ)、経費にできる境界線</h2>
+      <p class="column-card__excerpt">その美容院代、経費にしていいの? 「 毎日行ってるから 」は理由にならない 「ヘアセット代」「ネイル代」「エステ代」 夜のお仕事をされている…</p>
+      <span class="column-card__date">2026.09.03</span>
+    </a>
+    <a class="column-card" href="yofuku-ishou.html">
+      <span class="column-card__tag">夜職向け</span>
+      <h2 class="column-card__title">その衣装代、経費にしていいの?国税庁の見解を読み解いてみた</h2>
+      <p class="column-card__excerpt">「 衣装代は経費になる 」 そう聞いたことがある方、多いと思います。 でも実は、これには条件付きという話、知っていましたか? ■ 国税庁が示…</p>
+      <span class="column-card__date">2026.09.02</span>
+    </a>
+    <a class="column-card" href="keihi-kihon.html">
+      <span class="column-card__tag">基礎知識</span>
+      <h2 class="column-card__title">経費って、そもそも何?</h2>
+      <p class="column-card__excerpt">「 これって経費になりますか? 」 記帳の相談で、一番よく聞かれる質問です。 答えを先に言うと、経費とは 「 事業のために使った、必要なお金…</p>
+      <span class="column-card__date">2026.09.01</span>
+    </a>
   </div>
 </div>
 
@@ -74,8 +120,6 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <script src="../js/main.js"></script>
-<script type="module" src="../js/column-list.js"></script>
 </body>
 </html>

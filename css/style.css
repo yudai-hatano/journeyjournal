@@ -1044,6 +1044,7 @@ button { font-family: inherit; cursor: pointer; }
   padding-top: 28px;
   border-top: 1px dashed var(--line);
 }
+.column-article__cta .btn + .btn { margin-left: 12px; }
 
 /* ==========================================================================
    お問い合わせ
