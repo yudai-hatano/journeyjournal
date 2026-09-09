@@ -223,6 +223,9 @@ const HEADER_HTML = `<!-- ==================== ヘッダー ====================
         <li><a href="../index.html#software">対応ソフト</a></li>
         <li><a href="../index.html#flow">ご依頼の流れ</a></li>
         <li><a href="../index.html#news">お知らせ</a></li>
+        <li><a href="../kojin-jigyou.html">個人事業主の方へ</a></li>
+        <li><a href="../houjin.html">法人の方へ</a></li>
+        <li><a href="../yashoku.html">夜職の方へ</a></li>
         <li><a href="index.html">コラム</a></li>
         <li><a href="../index.html#faq">よくある質問</a></li>
         <li><a href="../index.html#notice">ご依頼にあたって</a></li>
@@ -243,6 +246,9 @@ const FOOTER_HTML = `<!-- ==================== フッター ====================
     <a href="../index.html#top" class="brand">JourneyJournal</a>
     <div class="site-footer__links">
       <a href="../index.html#service">サービス・料金</a>
+      <a href="../kojin-jigyou.html">個人事業主の方へ</a>
+      <a href="../houjin.html">法人の方へ</a>
+      <a href="../yashoku.html">夜職の方へ</a>
       <a href="index.html">コラム</a>
       <a href="../index.html#faq">よくある質問</a>
       <a href="../index.html#notice">ご依頼にあたって</a>
@@ -431,6 +437,9 @@ function sitemapXml(articles, base) {
   const today = new Date().toISOString().slice(0, 10);
   const staticUrls = [
     { loc: `${base}/`, changefreq: "weekly", priority: "1.0" },
+    { loc: `${base}/kojin-jigyou.html`, changefreq: "monthly", priority: "0.8" },
+    { loc: `${base}/houjin.html`, changefreq: "monthly", priority: "0.8" },
+    { loc: `${base}/yashoku.html`, changefreq: "monthly", priority: "0.8" },
     { loc: `${base}/column/`, changefreq: "weekly", priority: "0.7" }
   ];
   const articleUrls = articles.map((art) => ({

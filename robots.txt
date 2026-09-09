@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 Allow: /column/
+Allow: /kojin-jigyou.html
+Allow: /houjin.html
+Allow: /yashoku.html
 Disallow: /admin.html
 
 Sitemap: https://yudai-hatano.github.io/journeyjournal/sitemap.xml
