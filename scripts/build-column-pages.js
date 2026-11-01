@@ -440,6 +440,7 @@ function sitemapXml(articles, base) {
     { loc: `${base}/kojin-jigyou.html`, changefreq: "monthly", priority: "0.8" },
     { loc: `${base}/houjin.html`, changefreq: "monthly", priority: "0.8" },
     { loc: `${base}/yashoku.html`, changefreq: "monthly", priority: "0.8" },
+    { loc: `${base}/nencho-check.html`, changefreq: "yearly", priority: "0.7" },
     { loc: `${base}/column/`, changefreq: "weekly", priority: "0.7" }
   ];
   const articleUrls = articles.map((art) => ({

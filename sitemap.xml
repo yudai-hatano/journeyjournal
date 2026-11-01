@@ -22,6 +22,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://yudai-hatano.github.io/journeyjournal/nencho-check.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://yudai-hatano.github.io/journeyjournal/column/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

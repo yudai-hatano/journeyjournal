@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年末調整 1分チェック | JourneyJournal</title>
+<meta name="description" content="質問に答えるだけで、年末調整に必要な書類と確定申告が必要かどうかがわかる無料チェック。令和8年分(2026年分)対応。">
+<link rel="canonical" href="https://yudai-hatano.github.io/journeyjournal/nencho-check.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JourneyJournal">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://yudai-hatano.github.io/journeyjournal/nencho-check.html">
+<meta property="og:title" content="年末調整 1分チェック | JourneyJournal">
+<meta property="og:description" content="質問に答えるだけで、年末調整に必要な書類と確定申告が必要かどうかがわかる無料チェック。令和8年分(2026年分)対応。">
+<meta property="og:image" content="https://yudai-hatano.github.io/journeyjournal/assets/ogp.svg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2312203a'/%3E%3Ccircle cx='50' cy='50' r='46' fill='none' stroke='%23d9ab5c' stroke-width='3'/%3E%3Cpolygon points='50,20 58,50 50,80 42,50' fill='%23d9ab5c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 1問ずつ進む縦1列の用紙。結果は「提出前の控え」のようなチェック票 */
+:root{
+  --bg:#fbf3f4; --paper:#ffffff; --ink:#35202b; --muted:#745c68; --line:#ecd6dc;
+  --accent:#c2305f; --accent-ink:#ffffff; --soft:#fbe4ea; --warn-bg:#fff1d6; --warn-ink:#71460a; --ok-bg:#def3e6; --ok-ink:#17563a;
+  --display:"Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif; --body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1f141a; --paper:#2b1c24; --ink:#f8e9ee; --muted:#c5aab6; --line:#4b3440;
+  --accent:#ff7fa6; --accent-ink:#2b0e1a; --soft:#44242f; --warn-bg:#46340f; --warn-ink:#ffdf9f; --ok-bg:#163a29; --ok-ink:#aeeccb; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1f141a; --paper:#2b1c24; --ink:#f8e9ee; --muted:#c5aab6; --line:#4b3440;
+  --accent:#ff7fa6; --accent-ink:#2b0e1a; --soft:#44242f; --warn-bg:#46340f; --warn-ink:#ffdf9f; --ok-bg:#163a29; --ok-ink:#aeeccb; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75}
+.wrap{max-width:620px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+header{display:grid;gap:4px}
+.brand{font-size:13px;color:var(--muted);letter-spacing:.06em}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(28px,7vw,38px);line-height:1.3;margin:0;text-wrap:balance}
+.lead{margin:0;color:var(--muted);font-size:14.5px}
+.first{background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:14px 16px;font-size:14.5px;display:grid;gap:6px}
+.first b{font-family:var(--display);font-size:16px}
+.first ul{margin:0;padding-left:1.2em}
+.meter{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);transition:width .2s}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px 18px;display:grid;gap:14px}
+h2{font-family:var(--display);font-weight:700;font-size:21px;line-height:1.45;margin:0;text-wrap:balance}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.opts{display:grid;gap:9px;border:0;padding:0;margin:0}
+.opt{display:flex;gap:11px;align-items:flex-start;padding:13px;border:1.5px solid var(--line);border-radius:8px;cursor:pointer;background:transparent}
+.opt:hover{border-color:var(--accent)}
+.opt:has(input:checked){border-color:var(--accent);background:var(--soft)}
+.opt input{accent-color:var(--accent);width:19px;height:19px;margin:4px 0 0;flex:none}
+.opt span{min-width:0}
+.nav{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+button{font:inherit;font-weight:700;border-radius:8px;padding:12px 20px;cursor:pointer;border:1.5px solid var(--line);background:transparent;color:var(--ink)}
+button.go{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);flex:1 1 170px}
+button:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.verdict{border-radius:10px;padding:18px;display:grid;gap:6px}
+.verdict.ok{background:var(--ok-bg);color:var(--ok-ink)}
+.verdict.warn{background:var(--warn-bg);color:var(--warn-ink)}
+.verdict b{font-family:var(--display);font-size:22px;line-height:1.45}
+.verdict ul{margin:0;padding-left:1.2em;font-size:14.5px}
+h3{font-family:var(--display);font-size:18px;margin:0}
+.todo{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.todo label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.todo input{accent-color:var(--accent);width:19px;height:19px;margin-top:4px;flex:none}
+.todo input:checked + span{text-decoration:line-through;color:var(--muted)}
+.group{font-size:13px;font-weight:700;color:var(--accent);margin-top:6px}
+.reads{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.reads a{color:var(--accent);font-weight:500}
+.note{font-size:13px;color:var(--muted);margin:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.cta{display:block;text-align:center;text-decoration:none;font-weight:700;padding:13px;border-radius:8px;background:var(--soft);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.meter i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Journey Journal｜令和8年分（2026年分）対応</div>
+    <h1>年末調整 1分チェック</h1>
+    <p class="lead">質問に答えると、あなたに必要な書類と、確定申告が必要かどうかがわかります。入力した内容はどこにも送信されません。</p>
+  </header>
+  <section class="first" aria-label="先に確認">
+    <b>年末調整だけでは終わらない人もいます</b>
+    <ul>
+      <li>年末調整の対象外で確定申告をする人：報酬だけの個人事業主・フリーランス・夜職、給与が2,000万円超の人、年末時点で退職している人（原則）</li>
+      <li>年末調整のうえ確定申告も必要な人：副業など給与以外の所得が年20万円超の人、2か所以上から給与があり、年末調整をしていない分などが年20万円超の人</li>
+    </ul>
+    <span>わからなくても大丈夫です。質問に答えれば結果でわかります。</span>
+  </section>
+  <main id="app" aria-live="polite"></main>
+  <p class="note">目安を示す一般的な案内です。金額は令和8年分の国税庁の案内にもとづきます。個別の判断は勤務先の担当部署や税理士にご確認ください。</p>
+</div>
+
+<script>
+const NOTE = k => 'https://note.com/journey_journal_/n/' + k;
+const ART = {
+  base:  ['年末調整ってそもそも何？会社員と個人事業主の違い', NOTE('nd52edc4fce78')],
+  spouse:['配偶者控除・配偶者特別控除で年末調整はいくら変わる？', NOTE('n30aa7df82e76')],
+  dep:   ['扶養控除の書き方と控除額まるわかりガイド', NOTE('na6c017b11820')],
+  ins:   ['生命保険料控除・地震保険料控除の書き方', NOTE('na5aecb80f121')],
+  ideco: ['小規模企業共済等掛金控除とは？iDeCo・小規模企業共済', NOTE('nb4ba96794886')],
+  loan:  ['住宅ローン控除、1年目と2年目以降で何が違う？', NOTE('n25c982e92c1e')],
+  furu:  ['ふるさと納税と年末調整、ワンストップ特例の関係', NOTE('n08a6d8a54dff')],
+  shaho: ['国民年金・国民健康保険料も年末調整で書ける？', NOTE('n9d9e5838e408')],
+  job:   ['転職した人は要注意！前職の源泉徴収票', NOTE('n9b6e57a3896d')],
+  shin:  ['確定申告したほうがいいケースまとめ', NOTE('ndb9bc26bbf3c')]
+};
+
+const QS = [
+  {id:'work', t:'今年の働き方は？', opts:[
+    ['emp','会社員・パート・アルバイト（給与のみ）'],
+    ['self','個人事業主・フリーランス・夜職（報酬のみ）'],
+    ['both','両方ある（本業の給与＋副業の報酬など）']]},
+  {id:'spouse', t:'配偶者の今年の収入は？', hint:'給与だけの場合の目安です。結婚していない人は「いない」を選んでください。', opts:[
+    ['none','配偶者はいない'],
+    ['s1','給与収入 136万円以下'],
+    ['s2','給与収入 136万円超〜207万円以下'],
+    ['s3','給与収入 207万円超'],
+    ['s4','給与以外の収入がある・わからない']]},
+  {id:'deps', t:'生活費を支えている家族はいますか？', hint:'当てはまるものをすべて選んでください。年齢は今年12月31日時点です。', multi:1, none:'nodep', opts:[
+    ['nodep','いない'],
+    ['u16','16歳未満の子'],
+    ['a16','16〜18歳の子'],
+    ['a19','19〜22歳の子や親族'],
+    ['a23','23〜69歳の親族'],
+    ['a70','70歳以上の親や親族']]},
+  {id:'y19', t:'19〜22歳のご家族の今年の収入は？', hint:'給与だけの場合の目安です。', when:a=>(a.deps||[]).includes('a19'), opts:[
+    ['y1','給与収入 136万円以下'],
+    ['y2','給与収入 136万円超〜197万円以下'],
+    ['y3','給与収入 197万円超']]},
+  {id:'dis', t:'あなたやご家族に、障害者手帳などをお持ちの方はいますか？', opts:[['no','いない'],['yes','いる']]},
+  {id:'single', t:'ひとり親または寡婦に当てはまりますか？', hint:'今年12月31日時点で結婚しておらず、生計を一にする子がいる人、夫と死別・離婚した人などが対象です。所得などの条件があります。', opts:[['no','当てはまらない'],['yes','当てはまる・たぶん当てはまる']]},
+  {id:'shaho', t:'国民年金や国民健康保険料を自分で払いましたか？', hint:'入社前の期間の分や、家族の分を払った場合も含みます。', opts:[['no','払っていない'],['yes','払った']]},
+  {id:'ins', t:'入っている保険は？', hint:'当てはまるものをすべて選んでください。', multi:1, none:'noins', opts:[
+    ['noins','入っていない'],
+    ['life','生命保険・医療保険・個人年金'],
+    ['eq','地震保険（火災保険の地震保険分）']]},
+  {id:'ideco', t:'iDeCoや小規模企業共済に入っていますか？', opts:[['no','入っていない'],['yes','入っている']]},
+  {id:'loan', t:'住宅ローンでマイホームを買いましたか？', opts:[
+    ['no','当てはまらない'],
+    ['y1','買った（控除を受けるのは今年が初めて）'],
+    ['y2','買った（控除を受けるのは2年目以降）']]},
+  {id:'furu', t:'今年、ふるさと納税をしましたか？', opts:[
+    ['no','していない'],
+    ['one','した（5自治体以内で、ワンストップ特例を申請）'],
+    ['tax','した（6自治体以上、または特例を申請していない）']]},
+  {id:'etc', t:'次の中に当てはまるものはありますか？', hint:'当てはまるものをすべて選んでください。', multi:1, none:'noetc', opts:[
+    ['noetc','どれも当てはまらない'],
+    ['med','医療費が年間10万円を超えた（総所得が少ない人はもっと低い場合も）'],
+    ['jobchg','今年転職した（今の会社で年末まで働く）'],
+    ['quit','今年退職し、年末時点で働いていない'],
+    ['two','2か所以上から給与をもらっている'],
+    ['high','今年の給与が2,000万円を超える']]}
+];
+
+let a = {}, i = 0;
+const app = document.getElementById('app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const flow = () => QS.filter(q => !q.when || q.when(a));
+
+function renderQ(){
+  const f = flow(), q = f[i], cur = a[q.id];
+  const type = q.multi ? 'checkbox' : 'radio';
+  app.innerHTML = `<div class="sheet">
+    <div class="count">質問 ${i+1} / ${f.length}</div>
+    <div class="meter" role="progressbar" aria-valuenow="${i+1}" aria-valuemin="1" aria-valuemax="${f.length}"><i style="width:${(i+1)/f.length*100}%"></i></div>
+    <h2 id="qt">${esc(q.t)}</h2>
+    ${q.hint ? `<p class="hint">${esc(q.hint)}</p>` : ''}
+    <fieldset class="opts" aria-labelledby="qt">
+      ${q.opts.map(([v,l]) => `<label class="opt"><input type="${type}" id="${q.id}-${v}" name="${q.id}" value="${v}" ${(q.multi ? (cur||[]).includes(v) : cur===v) ? 'checked' : ''}><span>${esc(l)}</span></label>`).join('')}
+    </fieldset>
+    <div class="nav">
+      <button type="button" id="back" ${i===0?'disabled':''}>戻る</button>
+      <button type="button" class="go" id="next">${i===f.length-1?'結果を見る':'次へ'}</button>
+    </div></div>`;
+  const next = document.getElementById('next');
+  const sync = () => { next.disabled = !(q.multi ? (a[q.id]||[]).length : a[q.id]); };
+  app.querySelectorAll('input').forEach(el => el.addEventListener('change', () => {
+    if (q.multi) {
+      let v = [...app.querySelectorAll('input:checked')].map(x => x.value);
+      if (el.checked && el.value === q.none) v = [q.none];
+      else if (el.checked) v = v.filter(x => x !== q.none);
+      app.querySelectorAll('input').forEach(x => { x.checked = v.includes(x.value); });
+      a[q.id] = v;
+    } else a[q.id] = el.value;
+    sync();
+  }));
+  document.getElementById('back').onclick = () => { i--; renderQ(); };
+  next.onclick = () => { i === flow().length-1 ? renderR() : (i++, renderQ()); };
+  sync();
+}
+
+function judge(a){
+  const has = (k,v) => (a[k]||[]).includes(v);
+  const emp = a.work !== 'self';
+  const self = a.work !== 'emp';
+  const docs = [], reads = [], why = [], notes = [];
+  const add = (g,t) => docs.push([g,t]);
+  const read = k => { if (!reads.includes(k)) reads.push(k); };
+
+  if (emp) add('全員','勤務先から配られる申告書（扶養控除等申告書、基礎控除申告書 兼 配偶者控除等申告書 兼 所得金額調整控除申告書）');
+  if (self) { add('全員','1年分の収入と経費がわかるもの（支払調書、請求書、領収書など）'); why.push(a.work==='self' ? '個人事業主・フリーランス・夜職の報酬は年末調整の対象外です' : '給与以外の所得が年20万円を超えると確定申告が必要です'); read('base'); }
+
+  if (['s1','s2','s4'].includes(a.spouse)) {
+    add('配偶者','配偶者の今年の収入の見込み額（証明書は不要）');
+    read('spouse');
+    if (a.spouse==='s1') notes.push('配偶者控除の対象になりそうです（配偶者の合計所得62万円以下。あなたの合計所得が1,000万円以下の場合）。');
+    if (a.spouse==='s2') notes.push('配偶者特別控除の対象になりそうです（配偶者の合計所得62万円超133万円以下。あなたの合計所得が1,000万円以下の場合）。');
+    if (a.spouse==='s4') notes.push('配偶者の収入は「合計所得金額」で判定します。62万円以下なら配偶者控除、133万円以下なら配偶者特別控除の対象です。');
+  }
+
+  const deps = a.deps || [];
+  if (deps.some(d => d !== 'nodep')) {
+    add('扶養','扶養する家族の氏名・生年月日・マイナンバーと、今年の収入の見込み額');
+    read('dep');
+    if (deps.includes('u16')) notes.push('16歳未満の子は扶養控除の対象外ですが、住民税のために申告書の「16歳未満の扶養親族」欄に書きます。');
+    if (a.y19==='y1') notes.push('19〜22歳のご家族は特定扶養親族で、控除額は63万円です。');
+    if (a.y19==='y2') notes.push('19〜22歳のご家族は特定親族特別控除の対象です。控除額は収入に応じて63万円〜3万円です。');
+  }
+  const y23 = deps.some(d => ['u16','a16','a19'].includes(d));
+
+  if (a.dis==='yes') { add('障害者控除','障害者手帳など（区分と等級を確認。障害のある方の情報を申告書に記入）'); notes.push('障害者控除の対象になる可能性があります。'); }
+  if (a.single==='yes') notes.push('ひとり親控除または寡婦控除の対象になる可能性があります。扶養控除等申告書の該当欄を確認してください。');
+  if (a.shaho==='yes') { add('社会保険料','国民年金の「社会保険料（国民年金保険料）控除証明書」、国民健康保険料の支払額がわかるもの'); read('shaho'); }
+
+  if (has('ins','life')) {
+    add('保険','生命保険料控除証明書（保険ごと。新制度・旧制度の区分を確認）');
+    read('ins');
+    if (y23) notes.push('23歳未満の扶養親族がいると、令和8年分から新制度の一般生命保険料控除の上限が4万円から6万円に増えます（生命保険料控除全体の上限は12万円のまま）。');
+  }
+  if (has('ins','eq')) { add('保険','地震保険料控除証明書'); read('ins'); }
+  if (a.ideco==='yes') { add('iDeCo・共済','小規模企業共済等掛金払込証明書'); read('ideco'); }
+
+  if (a.loan==='y1') {
+    add('住宅ローン','計算明細書、金融機関の年末残高等証明書、登記事項証明書、売買・工事請負契約書の写しなど');
+    why.push('住宅ローン控除の1年目は確定申告が必要です'); read('loan');
+  }
+  if (a.loan==='y2') { add('住宅ローン','税務署から届く控除証明書 兼 申告書、金融機関の年末残高等証明書'); read('loan'); }
+
+  if (a.furu==='tax') { add('ふるさと納税','寄附先の受領証明書（または寄附金控除に関する証明書）'); why.push('ふるさと納税の控除を受けるには確定申告が必要です'); read('furu'); }
+  if (a.furu==='one') read('furu');
+
+  if (has('etc','med')) { add('医療費','医療費控除の明細書（領収書をもとに作成）'); why.push('医療費控除は年末調整では受けられません（確定申告をすれば税金が戻る場合があります）'); read('shin'); }
+  if (has('etc','jobchg')) { add('転職','前職の源泉徴収票（今の勤務先に提出）'); read('job'); }
+  if (has('etc','quit')) { add('退職','退職した会社の源泉徴収票'); why.push('年末に在籍していないと年末調整は受けられません（確定申告で精算します）'); read('job'); }
+  if (has('etc','two')) why.push('2か所以上から給与があると、確定申告が必要な場合があります（年末調整を受けない給与などが年20万円以下なら原則不要）');
+  if (has('etc','high')) why.push('給与が2,000万円を超えると年末調整の対象外です');
+
+  if (a.furu==='one' && why.length) notes.push('確定申告をするとワンストップ特例は無効になります。ふるさと納税の分も確定申告書に書き、受領証明書を用意してください。');
+  if (why.length) read('shin');
+  const kind = a.work==='self' ? 'only' : (why.length ? 'also' : 'nencho');
+  return {kind, docs, reads, why, notes};
+}
+
+function renderR(){
+  const r = judge(a);
+  const head = {
+    nencho:['年末調整で完了できそうです','ok'],
+    also:['確定申告も確認してください','warn'],
+    only:['年末調整ではなく確定申告です','warn']
+  }[r.kind];
+  const groups = [...new Set(r.docs.map(d => d[0]))];
+  let n = 0;
+  app.innerHTML = `<div style="display:grid;gap:16px">
+    <div class="verdict ${head[1]}"><b>${head[0]}</b>
+      ${r.why.length ? `<ul>${r.why.map(w=>`<li>${esc(w)}</li>`).join('')}</ul>` : '<span>下のものをそろえて、勤務先に提出しましょう。</span>'}</div>
+    <div class="sheet"><h3>そろえるもの</h3>
+      <ul class="todo">${groups.map(g=>`<li class="group">${esc(g)}</li>`+r.docs.filter(d=>d[0]===g).map(d=>`<li><label><input type="checkbox" id="doc-${n++}"><span>${esc(d[1])}</span></label></li>`).join('')).join('')}</ul></div>
+    ${r.notes.length ? `<div class="sheet"><h3>あなたへのメモ</h3><ul class="reads">${r.notes.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>` : ''}
+    ${r.reads.length ? `<div class="sheet"><h3>読んでおきたい記事</h3><ul class="reads">${r.reads.map(k=>`<li><a href="${ART[k][1]}" target="_blank" rel="noopener">${esc(ART[k][0])}</a></li>`).join('')}</ul></div>` : ''}
+    <div class="actions"><button type="button" id="copy">結果をコピー</button><button type="button" id="again">最初からやり直す</button></div>
+    <a class="cta" href="https://yudai-hatano.github.io/journeyjournal/" target="_blank" rel="noopener">記帳代行・経理サポートの詳細を見る</a></div>`;
+  document.getElementById('again').onclick = () => { a = {}; i = 0; renderQ(); };
+  const copy = document.getElementById('copy');
+  copy.onclick = () => {
+    const text = head[0] + '\n' + r.why.map(w=>'・'+w).join('\n') + '\n\n【そろえるもの】\n' + r.docs.map(d=>'□ '+d[1]).join('\n');
+    navigator.clipboard.writeText(text).then(() => { copy.textContent = 'コピーしました'; }, () => { copy.textContent = 'コピーできませんでした'; });
+  };
+  window.scrollTo(0,0);
+}
+
+if (typeof module !== 'undefined') module.exports = {judge};
+else renderQ();
+</script>
+</body>
+</html>
